@@ -12,6 +12,7 @@ const graphcms = new GraphQLClient(
 const QUERY = gql`
 {
 posts{
+    id,
     title,
     datePublished,
     slug
@@ -25,6 +26,10 @@ posts{
       }
     }
     coverPhoto{
+      publishedAt
+      createdBy {
+        id
+      }
       url
     }
   }
@@ -37,7 +42,7 @@ export async function getStaticProps() {
     props: {
       posts,
     },
-    revalidate: 10,
+    revalidate: 30,
   }
 }
 
